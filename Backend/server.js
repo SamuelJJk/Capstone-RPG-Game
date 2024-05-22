@@ -20,17 +20,31 @@ app.get("/character",async(req,res)=>{
     const character = await Character.find()
     res.json(character)
 })
+app.get("/character/:name",async(req,res)=>{
+    console.log(req.body)
+    const characterName = req.params.name
+    const character = await Character.findOne({name :characterName})
+    res.json(character)
+})
 // create
 app.post("/character",async(req,res)=>{
-    const {name,charClass,health, mana,strenght,intelligence} = req.body
-    const character = await Character.create({
-        name:name,
-        charClass:charClass,
-        health:health,
-        mana:mana,
-        strenght:strenght,
-        intelligence:intelligence
-    })
+    const character = await Character.create(req.body)
+    console.log(req.body)
+    res.json(character)
+})
+//update
+app.put("/character/:name",async(req,res)=>{
+    const characterName = req.params.name
+    const {health,mana} = req.body
+    
+    const character = await Character.findOne({name :characterName})
+    const updatedCharacter = await Character.findOneAndUpdate(
+        {name:characterName},
+        {
+            health: health,
+            mana: mana
+        }
+    )
     console.log(req.body)
     res.json(character)
 })

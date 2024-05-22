@@ -5,7 +5,7 @@ const characterSchema = new mongoose.Schema({
     charClass:String,
     health:Number,
     mana:Number,
-    strenght:Number,
+    strength:Number,
     intelligence:Number,
 });
 
