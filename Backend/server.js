@@ -36,7 +36,7 @@ app.post("/character",async(req,res)=>{
 app.put("/character/:name",async(req,res)=>{
     const characterName = req.params.name
     const {health,mana} = req.body
-    
+
     const character = await Character.findOne({name :characterName})
     const updatedCharacter = await Character.findOneAndUpdate(
         {name:characterName},
@@ -48,6 +48,19 @@ app.put("/character/:name",async(req,res)=>{
     console.log(req.body)
     res.json(character)
 })
+//delete
+app.delete("/character/delete/:name",async(req,res)=>{
+    const characterName = req.params.name
+    const characterid = req.params.id
+    await Character.deleteOne({
+      name: characterName
+    })
+    await Character.deleteOne({
+        id: characterid
+    })
+    res.json({success: "Record has been deleted successfully"})
+})
+
 
 
 
