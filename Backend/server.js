@@ -104,10 +104,6 @@ app.post("/enemy", async(req,res)=>{
     res.json(enemy)
 })
 
-
-
-
-
 //update
 app.put("/enemy/:name",async(req,res)=>{
     const enemyName = req.params.name
