@@ -60,8 +60,58 @@ app.delete("/character/delete/:name",async(req,res)=>{
     })
     res.json({success: "Record has been deleted successfully"})
 })
+// Items route
+// read
+app.get("/item",async(req,res)=>{
+    const item = Item.find()
+    res.json(item)
+})
+app.get("/item/:name",async(req,res)=>{
+    const itemName = req.params.name
+    const item = await Item.findOne({name :itemName})
+    res.json(item)
+})
+//create
+app.post("/item",async(req,res)=>{
+    const item = await Item.create(req.body)
+    console.log(req.body)
+    res.json(item)
+})
+//enemy
+// read
+app.get("/enemy",async(req,res)=>{
+    const enemy = Enemy.find();
+    res.json(enemy)
+})
+app.get("/enemy/:name",async(req,res)=>{
+    const enemyName = req.params.name
+    const enemy = Enemy.findOne({name:enemyName});
+    res.json(enemy)
+})
+//update
+app.put("/enemy/:name",async(req,res)=>{
+    const enemyName = req.params.name
+    const {health,mana} = req.body
 
-
+    const enemy = await Enemy.findOne({name :enemyName})
+    const updatedEnemy = await Enemy.findOneAndUpdate(
+        {name:enemyName},
+        {
+            health: health,
+            mana: mana
+        }
+    )
+    console.log(req.body)
+    res.json(enemy)
+})
+//delete
+app.delete("/enemy/delete/:name",async(req,res)=>{
+    const enemyName = req.params.name
+    await Enemy.deleteOne({
+      name: enemyName
+    })
+    res.json({success: "Record has been deleted successfully"})
+})
 
 
 
