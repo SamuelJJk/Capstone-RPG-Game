@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const enemySchema = new mongoose.Schema({
     name:String,
     health:Number,
-    strenght:Number,
+    strength:Number,
     intelligence:Number,
 });
 
